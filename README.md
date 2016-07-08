@@ -2,7 +2,7 @@ The Storj Share CLI (https://github.com/Storj/storjshare-cli).
 
 ## Build ##
 
-This image is built automatically every day at **23:15 UTC** (and whenever anything gets pushed to github) from the code that is available via `npm install`.
+This image is built automatically every 8 hours, at 07:15, 15:15 and 23:15 (all times UTC), and whenever anything gets pushed to github.
 
 ## Setup ##
 
