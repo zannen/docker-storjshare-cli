@@ -2,7 +2,17 @@ The Storj Share CLI (https://github.com/Storj/storjshare-cli).
 
 ## Build ##
 
-This image is built automatically every 8 hours, at 07:15, 15:15 and 23:15 (all times UTC), and whenever anything gets pushed to github.
+This image is built automatically every 8 hours, at 07:15, 15:15 and 23:15 (all times UTC), and whenever anything gets pushed to github. Pull the latest with:
+
+    bash$ docker pull oreandawe/storjshare-cli:latest
+
+## Local Build ##
+
+Alternatively, build the container locally:
+
+    bash$ cd /path/to/your/buildarea
+    bash$ git clone https://github.com/zannen/docker-storj-farmer
+    bash$ docker build -t oreandawe/storjshare-cli docker-storjshare-cli/
 
 ## Setup ##
 
