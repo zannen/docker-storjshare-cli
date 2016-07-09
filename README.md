@@ -4,21 +4,21 @@ The Storj Share CLI (https://github.com/Storj/storjshare-cli).
 
 This image is built automatically every 8 hours, at 07:15, 15:15 and 23:15 (all times UTC), and whenever anything gets pushed to github. Pull the latest with:
 
-    bash$ docker pull oreandawe/storjshare-cli:latest
+    shell$ docker pull oreandawe/storjshare-cli:latest
 
 ## Local Build ##
 
 Alternatively, build the container locally:
 
-    bash$ cd /path/to/your/buildarea
-    bash$ git clone https://github.com/zannen/docker-storj-farmer
-    bash$ docker build -t oreandawe/storjshare-cli docker-storjshare-cli/
+    shell$ cd /path/to/your/buildarea
+    shell$ git clone https://github.com/zannen/docker-storj-farmer
+    shell$ docker build -t oreandawe/storjshare-cli docker-storjshare-cli/
 
 ## Setup ##
 
 First, run it interactively to set things up:
 
-    bash$ docker run --rm -ti --name storjshare \
+    shell$ docker run --rm -ti --name storjshare \
         -v /path/to/storjshare:/storjshare \
         oreandawe/storjshare-cli:latest
     
@@ -28,14 +28,14 @@ Notes:
 
 * Specify `/storjshare/data` for the path to store configuration and data, and `/storjshare/id_ecdsa` for the path to store the key. The directory `/path/to/storjshare` on the host appears as `/storjshare` inside the container.
 * Choose a long random password, and don't make it the same as any other password used elsewhere, because the password is easy to find by anyone who has login access to the host where the container is being run:
-      bash$ docker inspect storjshare | jq '.[0].Args'
-      bash$ ps -ef | grep storjshare
+      shell$ docker inspect storjshare | jq '.[0].Args'
+      shell$ ps -ef | grep storjshare
 
 ## Running ##
 
 After setup, run the app in the background:
 
-    bash$ docker run -d --name storjshare \
+    shell$ docker run -d --name storjshare \
         -v /path/to/storjshare:/storjshare \
         --restart=always \
         oreandawe/storjshare-cli:latest start \
@@ -46,7 +46,7 @@ After setup, run the app in the background:
 
 Check versions for `npm`, `node` and `storjshare` with:
 
-    bash$ docker run --rm -ti --entrypoint /versions oreandawe/storjshare-cli
+    shell$ docker run --rm -ti --entrypoint /versions oreandawe/storjshare-cli
     node version:
     v4.3.0
 
@@ -68,8 +68,8 @@ Check versions for `npm`, `node` and `storjshare` with:
 
 Or run an interactive shell:
 
-    bash$ docker run --rm -ti --entrypoint /bin/sh oreandawe/storjshare-cli
+    shell$ docker run --rm -ti --entrypoint /bin/sh oreandawe/storjshare-cli
 
 Or connect to an existing container:
 
-    bash$ docker exec -ti nameofyourcontainer /bin/sh
+    shell$ docker exec -ti nameofyourcontainer /bin/sh
