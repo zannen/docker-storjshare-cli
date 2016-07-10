@@ -11,7 +11,7 @@ This image is built automatically every 8 hours, at 07:15, 15:15 and 23:15 (all 
 Alternatively, build the container locally:
 
     shell$ cd /path/to/your/buildarea
-    shell$ git clone https://github.com/zannen/docker-storj-farmer
+    shell$ git clone https://github.com/zannen/docker-storejshare-cli
     shell$ docker build -t oreandawe/storjshare-cli docker-storjshare-cli/
 
 ## Setup ##
