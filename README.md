@@ -20,7 +20,7 @@ First, run it interactively to set things up:
 
     shell$ docker run --rm -ti --name storjshare \
         -v /path/to/storjshare:/storjshare \
-        oreandawe/storjshare-cli:latest
+        oreandawe/storjshare-cli:latest setup
     
     (lots of questions...)
 
