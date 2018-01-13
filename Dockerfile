@@ -5,4 +5,4 @@ RUN apk update && \
     npm install -g storjshare-daemon && \
     rm -rf /var/cache/apk/*
 COPY versions /
-ENTRYPOINT ["/usr/bin/storjshare"]
+ENTRYPOINT ["/usr/bin/storjshare", "daemon", "-F"]
