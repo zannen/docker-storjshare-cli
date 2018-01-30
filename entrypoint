@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+if [ -z "${WALLET_ADDRESS}" ]; then
+	echo "!!! WALLET_ADDRESS must be set to an ERC20 wallet address";
+	exit 1;
+fi;
+
+storjshare daemon -F &
+sleep 1;
+
+mkdir -pv "${DATADIR}/share" "${DATADIR}/log";
+if [ ! -f "${DATADIR}/config.json" ]; then
+	storjshare create --storj "${WALLET_ADDRESS}" --storage "${DATADIR}/share" --size "${SHARE_SIZE}" --rpcport 4000 --rpcaddress 0.0.0.0 --tunnelportmin 4001 --tunnelportmax 4003 --logdir "${DATADIR}/log" --outfile "${DATADIR}/config.json" --noedit;
+fi;
+
+storjshare start --config "${DATADIR}/config.json";
+wait;
+
