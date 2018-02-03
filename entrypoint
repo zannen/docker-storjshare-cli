@@ -5,6 +5,12 @@ if [ -z "${WALLET_ADDRESS}" ]; then
 	exit 1;
 fi;
 
+# If our hostname has a hyphen-delimited suffix with a unique identifier, e.g. the ordinal if
+#    we're in a Kubernetes statefulset, use that suffix as a subdirectry in the main DATADIR
+if [ "$(echo "${USE_HOSTNAME_SUFFIX}" | tr /a-z/ /A-Z/)" == 'TRUE' ]; then
+	DATADIR="${DATADIR}/$(hostname | rev | cut -d- -f1 | rev)";
+fi;
+
 storjshare daemon -F &
 sleep 1;
 
