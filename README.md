@@ -20,7 +20,7 @@ docker build -t oreandawe/storjshare-cli:latest docker-storjshare-cli/
 
 ## Run Daemon ##
 
-Start the daemon by using this command:
+Start the daemon by using this command (optional args shown in square brackets with default values):
 
 ```bash
 docker run --detach \
@@ -28,20 +28,12 @@ docker run --detach \
     --restart=always \
     -v /path/to/storjdata:/storj \
     -p 4000-4003:4000-4003 \
+	-e WALLET_ADDRESS=your_ERC20_wallet_address \
+	[-e DATADIR=/storj] \
+	[-e SHARE_SIZE=1TB] \
+	[-e RPCADDRESS=0.0.0.0] \
+	[-e USE_HOSTNAME_SUFFIX=FALSE] \
     oreandawe/storjshare-cli:latest
-```
-
-If the Storj config file (`config.json`) needs to be created:
-
-```bash
-docker exec -ti mystorjdaemon storjshare-create \
-    --storj [YourERC20Address] \
-    --storage /storj/data \
-    --size [YourSize] \
-    --rpcport 4000 \
-    --logdir /storj/logdir \
-    --outfile /storj/config.json \
-    --noedit
 ```
 
 ## Stop Daemon ##
