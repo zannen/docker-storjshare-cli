@@ -29,6 +29,7 @@ docker run --detach \
     -v /path/to/storjdata:/storj \
     -p 4000-4003:4000-4003 \
 	-e WALLET_ADDRESS=your_ERC20_wallet_address \
+	[-e DAEMONADDRESS=127.0.0.1] \
 	[-e DATADIR=/storj] \
 	[-e SHARE_SIZE=1TB] \
 	[-e RPCADDRESS=0.0.0.0] \
