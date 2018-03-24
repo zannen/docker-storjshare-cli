@@ -5,6 +5,10 @@ if [ -z "${WALLET_ADDRESS}" ]; then
 	exit 1;
 fi;
 
+if [ -n $ "${DAEMONADDRESS}" ]; then
+  sed -i "s/127\.0\.0\.1/${DAEMONADDRESS}/" /usr/lib/node_modules/storjshare-daemon/lib/config/daemon.js
+fi
+
 # If our hostname has a hyphen-delimited suffix with a unique identifier, e.g. the ordinal if
 #    we're in a Kubernetes statefulset, use that suffix as a subdirectry in the main DATADIR
 if [ "$(echo "${USE_HOSTNAME_SUFFIX}" | tr /a-z/ /A-Z/)" == 'TRUE' ]; then
@@ -21,4 +25,3 @@ fi;
 
 storjshare start --config "${DATADIR}/config.json";
 wait;
-
