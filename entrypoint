@@ -20,7 +20,7 @@ sleep 1;
 
 mkdir -pv "${DATADIR}/share" "${DATADIR}/log";
 if [ ! -f "${DATADIR}/config.json" ]; then
-	storjshare create --storj "${WALLET_ADDRESS}" --storage "${DATADIR}/share" --size "${SHARE_SIZE}" --rpcport 4000 --rpcaddress "${RPCADDRESS}" --tunnelportmin 4001 --tunnelportmax 4003 --logdir "${DATADIR}/log" --outfile "${DATADIR}/config.json" --noedit;
+	storjshare create --storj "${WALLET_ADDRESS}" --storage "${DATADIR}/share" --size "${SHARE_SIZE}" --rpcport "${RPCPORT}" --rpcaddress "${RPCADDRESS}" --tunnelportmin 4001 --tunnelportmax 4003 --logdir "${DATADIR}/log" --outfile "${DATADIR}/config.json" --noedit;
 fi;
 
 storjshare start --config "${DATADIR}/config.json";

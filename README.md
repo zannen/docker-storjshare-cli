@@ -33,6 +33,7 @@ docker run --detach \
 	[-e DATADIR=/storj] \
 	[-e SHARE_SIZE=1TB] \
 	[-e RPCADDRESS=0.0.0.0] \
+	[-e RPCPORT=4000] \
 	[-e STORJ_MONITOR_API_KEY=your_storjstat_com_api_key] \
 	[-e USE_HOSTNAME_SUFFIX=FALSE] \
     oreandawe/storjshare-cli:latest
