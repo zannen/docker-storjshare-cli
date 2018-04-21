@@ -24,4 +24,11 @@ if [ ! -f "${DATADIR}/config.json" ]; then
 fi;
 
 storjshare start --config "${DATADIR}/config.json";
+
+if [ -n "${STORJ_MONITOR_API_KEY}" ]; then
+	sed -i "s/YOUR-TOKEN-HERE/${STORJ_MONITOR_API_KEY}/" /opt/StorjMonitor/storjMonitor.js;
+	cd /opt/StorjMonitor;
+	(/opt/StorjMonitor/storjMonitor.sh &) &
+fi
+
 wait;

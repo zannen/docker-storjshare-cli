@@ -33,9 +33,14 @@ docker run --detach \
 	[-e DATADIR=/storj] \
 	[-e SHARE_SIZE=1TB] \
 	[-e RPCADDRESS=0.0.0.0] \
+	[-e STORJ_MONITOR_API_KEY=your_storjstat_com_api_key] \
 	[-e USE_HOSTNAME_SUFFIX=FALSE] \
     oreandawe/storjshare-cli:latest
 ```
+
+## StorjStat / StorjMonitor support ##
+
+StorjStat is a free community made tool for monitoring your Storj farming node(s), the tool gives you both real-time and historical analysis. See [storjstat.com](https://storjstat.com) and [calxibe/StorjMonitor](https://github.com/calxibe/StorjMonitor) for more information. The StorjStat API is optionally supported by setting the `STORJ_MONITOR_API_KEY` environment variable when starting the `storjshare-cli` Docker container.
 
 ## Status ##
 
