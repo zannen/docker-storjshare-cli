@@ -42,7 +42,7 @@ docker run --detach \
 
 ## Tunneling / port forwarding ##
 
-If your storj Docker container runs behind a firewall and the `RPCPORT` port is not forwarded via a "Port forwarding", tunnelung is required in order for the clients to connect to your storj Docker container. If you have configured a port forwarding, set `TUNNELING_REQUIRED` to `FALSE` to no tunneling will be activated and the traffic from the clients will be directly routed to your storj instance.
+If your Storj Docker container runs behind a firewall and the `RPCPORT` port is not forwarded via a "Port forwarding", tunnelung is required in order for the clients to connect to your Storj Docker container. If you have configured a port forwarding, set `TUNNELING_REQUIRED` to `FALSE` so no tunneling will be activated and the traffic from the clients will be directly routed to your Storj instance.
 
 ## StorjStat / StorjMonitor support ##
 
