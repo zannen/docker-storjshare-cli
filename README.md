@@ -34,10 +34,15 @@ docker run --detach \
 	[-e SHARE_SIZE=1TB] \
 	[-e RPCADDRESS=0.0.0.0] \
 	[-e RPCPORT=4000] \
+	[-e TUNNELING_REQUIRED=TRUE] \
 	[-e STORJ_MONITOR_API_KEY=your_storjstat_com_api_key] \
 	[-e USE_HOSTNAME_SUFFIX=FALSE] \
     oreandawe/storjshare-cli:latest
 ```
+
+## Tunneling / port forwarding ##
+
+If your storj Docker container runs behind a firewall and the `RPCPORT` port is not forwarded via a "Port forwarding", tunnelung is required in order for the clients to connect to your storj Docker container. If you have configured a port forwarding, set `TUNNELING_REQUIRED` to `FALSE` to no tunneling will be activated and the traffic from the clients will be directly routed to your storj instance.
 
 ## StorjStat / StorjMonitor support ##
 
