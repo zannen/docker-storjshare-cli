@@ -81,7 +81,7 @@ docker rm mystorjdaemon
 Check versions for `npm`, `node` and `storjshare` with:
 
 ```bash
-docker run --rm -ti --entrypoint /versions oreandawe/storjshare-cli:latest
+docker run --rm -ti --entrypoint /versions.sh oreandawe/storjshare-cli:latest
 node version:
 v6.7.0
 
