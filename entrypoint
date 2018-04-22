@@ -23,6 +23,8 @@ if [ ! -f "${DATADIR}/config.json" ]; then
 	CONFIGURE_COMMAND="storjshare create --storj "${WALLET_ADDRESS}" --storage "${DATADIR}/share" --size "${SHARE_SIZE}" --rpcport "${RPCPORT}" --rpcaddress "${RPCADDRESS}" --logdir "${DATADIR}/log" --outfile "${DATADIR}/config.json" --noedit";
 	if [ "$(echo "${TUNNELING_REQUIRED}")" ]; then
 		CONFIGURE_COMMAND=""${CONFIGURE_COMMAND}" --tunnelportmin 4001 --tunnelportmax 4003";
+	else
+		CONFIGURE_COMMAND=""${CONFIGURE_COMMAND}" --manualforwarding";
 	fi;
 	$CONFIGURE_COMMAND
 fi;
