@@ -33,9 +33,20 @@ docker run --detach \
 	[-e DATADIR=/storj] \
 	[-e SHARE_SIZE=1TB] \
 	[-e RPCADDRESS=0.0.0.0] \
+	[-e RPCPORT=4000] \
+	[-e TUNNELING_REQUIRED=TRUE] \
+	[-e STORJ_MONITOR_API_KEY=your_storjstat_com_api_key] \
 	[-e USE_HOSTNAME_SUFFIX=FALSE] \
     oreandawe/storjshare-cli:latest
 ```
+
+## Tunneling / port forwarding ##
+
+If your Storj Docker container runs behind a firewall (e.g. a home router) and the `RPCPORT` port is not forwarded via a "Port forwarding", tunnelung is required in order for the clients to connect to your Storj Docker container. If you have configured a port forwarding, set `TUNNELING_REQUIRED` to `FALSE` so no tunneling will be activated and the traffic from the clients will be directly routed to your Storj instance.
+
+## StorjStat / StorjMonitor support ##
+
+StorjStat is a free community made tool for monitoring your Storj farming node(s), the tool gives you both real-time and historical analysis. See [storjstat.com](https://storjstat.com) and [calxibe/StorjMonitor](https://github.com/calxibe/StorjMonitor) for more information. The StorjStat API is optionally supported by using the `STORJ_MONITOR_API_KEY` environment variable when starting the `storjshare-cli` Docker container.
 
 ## Status ##
 

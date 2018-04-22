@@ -20,8 +20,21 @@ sleep 1;
 
 mkdir -pv "${DATADIR}/share" "${DATADIR}/log";
 if [ ! -f "${DATADIR}/config.json" ]; then
-	storjshare create --storj "${WALLET_ADDRESS}" --storage "${DATADIR}/share" --size "${SHARE_SIZE}" --rpcport 4000 --rpcaddress "${RPCADDRESS}" --tunnelportmin 4001 --tunnelportmax 4003 --logdir "${DATADIR}/log" --outfile "${DATADIR}/config.json" --noedit;
+	CONFIGURE_COMMAND="storjshare create --storj "${WALLET_ADDRESS}" --storage "${DATADIR}/share" --size "${SHARE_SIZE}" --rpcport "${RPCPORT}" --rpcaddress "${RPCADDRESS}" --logdir "${DATADIR}/log" --outfile "${DATADIR}/config.json" --noedit";
+	if [ "$(echo "${TUNNELING_REQUIRED}")" == 'TRUE' ]; then
+		CONFIGURE_COMMAND=""${CONFIGURE_COMMAND}" --tunnelportmin 4001 --tunnelportmax 4003";
+	else
+		CONFIGURE_COMMAND=""${CONFIGURE_COMMAND}" --manualforwarding";
+	fi;
+	$CONFIGURE_COMMAND
 fi;
 
 storjshare start --config "${DATADIR}/config.json";
+
+if [ -n "${STORJ_MONITOR_API_KEY}" ]; then
+	sed -i "s/YOUR-TOKEN-HERE/${STORJ_MONITOR_API_KEY}/" /opt/StorjMonitor/storjMonitor.js;
+	cd /opt/StorjMonitor;
+	(/opt/StorjMonitor/storjMonitor.sh &) &
+fi
+
 wait;
