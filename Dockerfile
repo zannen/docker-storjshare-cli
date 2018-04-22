@@ -23,7 +23,5 @@ ENV TUNNELING_REQUIRED=TRUE
 ENV STORJ_MONITOR_API_KEY=
 EXPOSE 4000-4003/tcp
 
-COPY versions.sh /
-COPY entrypoint.sh /
-
-ENTRYPOINT ["/entrypoint.sh"]
+ADD versions entrypoint /
+ENTRYPOINT ["/entrypoint"]
