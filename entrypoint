@@ -1,40 +1,39 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 if [ -z "${WALLET_ADDRESS}" ]; then
-	echo "!!! WALLET_ADDRESS must be set to an ERC20 wallet address";
-	exit 1;
-fi;
+	echo "!!! WALLET_ADDRESS must be set to an ERC20 wallet address"
+	exit 1
+fi
 
 if [ -n "${DAEMONADDRESS}" ]; then
-  sed -i "s/127\.0\.0\.1/${DAEMONADDRESS}/" /usr/lib/node_modules/storjshare-daemon/lib/config/daemon.js
+  sed -i "s/127\\.0\\.0\\.1/${DAEMONADDRESS}/" /usr/lib/node_modules/storjshare-daemon/lib/config/daemon.js
 fi
 
 # If our hostname has a hyphen-delimited suffix with a unique identifier, e.g. the ordinal if
 #    we're in a Kubernetes statefulset, use that suffix as a subdirectry in the main DATADIR
 if [ "$(echo "${USE_HOSTNAME_SUFFIX}" | tr /a-z/ /A-Z/)" == 'TRUE' ]; then
-	DATADIR="${DATADIR}/$(hostname | rev | cut -d- -f1 | rev)";
-fi;
+	DATADIR="${DATADIR}/$(hostname | rev | cut -d- -f1 | rev)"
+fi
 
 storjshare daemon -F &
-sleep 1;
+sleep 1
 
-mkdir -pv "${DATADIR}/share" "${DATADIR}/log";
+mkdir -pv "${DATADIR}/share" "${DATADIR}/log"
 if [ ! -f "${DATADIR}/config.json" ]; then
-	CONFIGURE_COMMAND="storjshare create --storj "${WALLET_ADDRESS}" --storage "${DATADIR}/share" --size "${SHARE_SIZE}" --rpcport "${RPCPORT}" --rpcaddress "${RPCADDRESS}" --logdir "${DATADIR}/log" --outfile "${DATADIR}/config.json" --noedit";
-	if [ "$(echo "${TUNNELING_REQUIRED}")" == 'TRUE' ]; then
-		CONFIGURE_COMMAND=""${CONFIGURE_COMMAND}" --tunnelportmin 4001 --tunnelportmax 4003";
+	if [ "${TUNNELING_REQUIRED}" == 'TRUE' ]; then
+		OPTS="--tunnelportmin 4001 --tunnelportmax 4003"
 	else
-		CONFIGURE_COMMAND=""${CONFIGURE_COMMAND}" --manualforwarding";
-	fi;
-	$CONFIGURE_COMMAND
-fi;
+		OPTS="--manualforwarding"
+	fi
+	storjshare create --storj "${WALLET_ADDRESS}" --storage "${DATADIR}/share" --size "${SHARE_SIZE}" --rpcport "${RPCPORT}" --rpcaddress "${RPCADDRESS}" --logdir "${DATADIR}/log" --outfile "${DATADIR}/config.json" --noedit $OPTS
+fi
 
-storjshare start --config "${DATADIR}/config.json";
+storjshare start --config "${DATADIR}/config.json"
 
 if [ -n "${STORJ_MONITOR_API_KEY}" ]; then
-	sed -i "s/YOUR-TOKEN-HERE/${STORJ_MONITOR_API_KEY}/" /opt/StorjMonitor/storjMonitor.js;
-	cd /opt/StorjMonitor;
+	sed -i "s/YOUR-TOKEN-HERE/${STORJ_MONITOR_API_KEY}/" /opt/StorjMonitor/storjMonitor.js
+	cd /opt/StorjMonitor
 	(/opt/StorjMonitor/storjMonitor.sh &) &
 fi
 
-wait;
+wait
