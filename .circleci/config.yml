@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: koalaman/shellcheck:stable
+    steps:
+      - checkout
+      - run:
+          name: Check shell scripts
+          command: shellcheck entrypoint versions
