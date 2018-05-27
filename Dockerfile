@@ -10,7 +10,7 @@ RUN \
 	rm -rf /opt/StorjMonitor/node_modules && \
 	npm --prefix /opt/StorjMonitor/ install && \
 	npm cache clear --force && \
-	apk del --no-cache g++ gcc git make bash python
+	apk del --no-cache g++ gcc git make python
 
 ENV USE_HOSTNAME_SUFFIX=FALSE
 ENV DATADIR=/storj
