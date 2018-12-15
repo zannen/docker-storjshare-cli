@@ -13,8 +13,7 @@ script:
 - >
   if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-    TAG=$(grep "ENV MYSQL_VERSION" Dockerfile | awk 'NF>1{print $NF}')
-    docker tag clexanis/docker-storjshare-cli-arm32v6 clexanis/docker-storjshare-cli-arm32v6:$TAG
-    docker push clexanis/docker-storjshare-cli-arm32v6:$TAG
+    docker tag clexanis/docker-storjshare-cli-arm32v6 clexanis/docker-storjshare-cli-arm32v6:latest
+    docker push clexanis/docker-storjshare-cli-arm32v6:latest
     docker push clexanis/docker-storjshare-cli-arm32v6
   fi
