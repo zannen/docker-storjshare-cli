@@ -1,4 +1,6 @@
 FROM arm32v6/alpine:3.5
+COPY qemu-arm-static /usr/bin
+
 RUN apk add --no-cache nodejs
 
 RUN \
