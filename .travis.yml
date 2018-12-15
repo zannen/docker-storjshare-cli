@@ -1,0 +1,20 @@
+sudo: required
+services:
+- docker
+language: bash
+script:
+# prepare qemu
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+# build image
+- docker build -t clexanis/docker-storjshare-cli-arm32v6 .
+# test image
+- docker run clexanis/docker-storjshare-cli-arm32v6 storjshare --version
+# push image
+- >
+  if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+    TAG=$(grep "ENV MYSQL_VERSION" Dockerfile | awk 'NF>1{print $NF}')
+    docker tag clexanis/docker-storjshare-cli-arm32v6 clexanis/docker-storjshare-cli-arm32v6:$TAG
+    docker push clexanis/docker-storjshare-cli-arm32v6:$TAG
+    docker push clexanis/docker-storjshare-cli-arm32v6
+  fi
