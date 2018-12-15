@@ -1,5 +1,4 @@
-FROM arm32v6/alpine:3.5
-RUN apk add --no-cache nodejs
+FROM arm32v6/node:lts-alpine
 
 RUN \
 	apk add --no-cache g++ gcc git make bash python && \
