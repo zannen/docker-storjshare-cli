@@ -1,4 +1,4 @@
-FROM gliderlabs/alpine:3.4
+FROM arm32v6/alpine:3.5
 RUN apk add --no-cache nodejs
 
 RUN \
