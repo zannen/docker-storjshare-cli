@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  shellcheck:
+  build:
     docker:
       - image: koalaman/shellcheck-alpine:stable
     steps:
