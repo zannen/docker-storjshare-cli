@@ -8,5 +8,5 @@ jobs:
       - run:
           name: Check shell scripts
           command: |
-            find . -type f -name '*.sh' | wc -l
-            find . -type f -name '*.sh' | xargs shellcheck --external-sources
+            find . -name .git -prune -o -name '*.sh' -print -o \( -type f -and -perm -100 \) -print | wc -l
+            find . -name .git -prune -o -name '*.sh' -print -o \( -type f -and -perm -100 \) -print | xargs shellcheck --external-sources
