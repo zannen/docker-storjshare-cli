@@ -1,8 +1,6 @@
 FROM gliderlabs/alpine:3.4
-RUN apk add --no-cache nodejs
-
 RUN \
-	apk add --no-cache g++ gcc git make bash python && \
+	apk add --no-cache bash g++ gcc git make nodejs python && \
 	export MAKEFLAGS=-j8 && \
 	npm install -g storjshare-daemon && \
 	git clone https://github.com/calxibe/StorjMonitor.git /opt/StorjMonitor && \
