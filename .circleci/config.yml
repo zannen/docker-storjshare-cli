@@ -1,10 +1,12 @@
 version: 2
 jobs:
-  build:
+  shellcheck:
     docker:
-      - image: koalaman/shellcheck:stable
+      - image: koalaman/shellcheck-alpine:stable
     steps:
       - checkout
       - run:
           name: Check shell scripts
-          command: shellcheck entrypoint versions
+          command: |
+            find . -type f -name '*.sh' | wc -l
+            find . -type f -name '*.sh' | xargs shellcheck --external-sources
