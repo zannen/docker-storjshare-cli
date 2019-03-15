@@ -52,7 +52,7 @@ StorjStat is a free community made tool for monitoring your Storj farming node(s
 
 Check the status of the daemon by using this command:
 
-```bash
+```
 docker exec mystorjdaemon storjshare status
 ```
 
@@ -71,7 +71,7 @@ The output should look something like this:
 
 Stop the daemon by using these commands:
 
-```bash
+```
 docker stop mystorjdaemon
 docker rm mystorjdaemon
 ```
@@ -80,7 +80,7 @@ docker rm mystorjdaemon
 
 Check versions for `npm`, `node` and `storjshare` with:
 
-```bash
+```
 docker run --rm -ti --entrypoint /versions oreandawe/storjshare-cli:latest
 node version:
 v6.7.0
@@ -103,12 +103,16 @@ daemon: 5.3.0, core: 8.5.0, protocol: 1.2.0
 
 Or run an interactive shell:
 
-```bash
+```
 docker run --rm -ti --entrypoint /bin/sh oreandawe/storjshare-cli
 ```
 
 Or connect to an existing container:
 
-```bash
+```
 docker exec -ti nameofyourcontainer /bin/sh
 ```
+
+## Troubleshooting ##
+
+* `exec format error` - The architecture of the program does not match the hardware architecture. The `latest` tag is built on `x86_64`, and there is an `armv6l` tag for Raspberry Pi hardware.
