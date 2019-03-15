@@ -15,7 +15,7 @@ RUN \
 	npm --prefix /opt/StorjMonitor/ install && \
 	npm cache clear --force
 RUN \
-	apk del --no-cache g++ gcc git make npm python
+	apk del --no-cache g++ gcc git make python
 
 ENV USE_HOSTNAME_SUFFIX=FALSE \
 	DATADIR=/storj \
@@ -30,3 +30,8 @@ EXPOSE 4000-4003/tcp
 
 ADD versions entrypoint /
 ENTRYPOINT ["/entrypoint"]
+RUN \
+	mv -i /node_modules/* /usr/lib/node_modules/ && \
+	mv /node_modules/.bin/ /usr/lib/node_modules/ && \
+	rmdir /node_modules
+ENV PATH="$PATH:/usr/lib/node_modules/.bin"
